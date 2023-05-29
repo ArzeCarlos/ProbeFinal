@@ -32,10 +32,7 @@ password = 'carlos123'
 usernameDisplay=''
 """Store data to database"""
 def storedata(data):
-    connection = pymysql.connect(host='localhost',
-                             user='carlos',
-                             password='Carlos123#',
-                             database='WSNProjectII')
+    connection = pymysql.connect(host='localhost',user='carlos',password='Carlos123#',database='WSNProjectII')
     with connection:
         with connection.cursor() as cursor:
             sql = "INSERT INTO `devices` (`value`, `description`,`node`) VALUES (%s,%s,%s)"
@@ -46,10 +43,7 @@ def storedata(data):
         connection.commit()
 """Get data from database"""
 def Getdata(name,password):
-    connection = pymysql.connect(host='localhost',
-                             user='carlos',
-                             password='Carlos123#',
-                             database='WSNProjectII')
+    connection = pymysql.connect(host='localhost',user='carlos',password='Carlos123#',database='WSNProjectII')
     with connection:
         with connection.cursor() as cursor:
             sql = "SELECT * FROM `user` WHERE name=%s AND password = SHA1(%s)"
@@ -163,10 +157,7 @@ def create():
     if request.method == 'GET':
         return render_template('pages/userCRUD.html')
     if request.method == 'POST':
-        connection = pymysql.connect(host='localhost',
-                             user='carlos',
-                             password='Carlos123#',
-                             database='WSNProjectII')
+        connection = pymysql.connect(host='localhost',user='carlos',password='Carlos123#',database='WSNProjectII')
         ci = request.form['ci']
         firstname = request.form['firstname']
         lastname = request.form['lastname']
@@ -196,10 +187,7 @@ def create():
 @app.route('/historic')
 def historic():
     global usernameDisplay
-    connection = pymysql.connect(host='localhost',
-                             user='carlos',
-                             password='Carlos123#',
-                             database='WSNProjectII')
+    connection = pymysql.connect(host='localhost',user='carlos',password='Carlos123#',database='WSNProjectII')
     legend = 'Humidity Data'
     legend2 = 'Temperature Data'
     legend3= 'CO2 Data'
@@ -239,11 +227,7 @@ def historic():
     labels4 = mesParameter4
     curs.execute("SELECT * FROM devices")
     devices=curs.fetchall()
-    return render_template('pages/historic.html',legend4=legend4,
-                           legend3=legend3,legend2=legend2,legend=legend,
-                           labels=labels,labels2=labels2,labels3=labels3,
-                           labels4=labels4,values=value,values2=value2,values3=value3,
-                           values4=value4,devices=devices,username=usernameDisplay)
+    return render_template('pages/historic.html',legend4=legend4,legend3=legend3,legend2=legend2,legend=legend,labels=labels,labels2=labels2,labels3=labels3,labels4=labels4,values=value,values2=value2,values3=value3,values4=value4,devices=devices,username=usernameDisplay)
 """
 Decorator for connect
 """
@@ -266,4 +250,5 @@ def disconnect():
 
 if __name__ == '__main__':
     socketio.run(app,host='0.0.0.0',port=5000,debug=True)
+    
     
