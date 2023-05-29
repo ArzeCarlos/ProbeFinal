@@ -32,7 +32,7 @@ password = 'carlos123'
 usernameDisplay=''
 """Store data to database"""
 def storedata(data):
-    connection = pymysql.connect(host='localhost',user='carlos',password='Carlos123#',database='WSNProjectII')
+    connection = pymysql.connect(host='localhost',user='root',password='Carlos123#',database='WSNProjectII')
     with connection:
         with connection.cursor() as cursor:
             sql = "INSERT INTO `devices` (`value`, `description`,`node`) VALUES (%s,%s,%s)"
@@ -43,7 +43,7 @@ def storedata(data):
         connection.commit()
 """Get data from database"""
 def Getdata(name,password):
-    connection = pymysql.connect(host='localhost',user='carlos',password='Carlos123#',database='WSNProjectII')
+    connection = pymysql.connect(host='localhost',user='root',password='Carlos123#',database='WSNProjectII')
     with connection:
         with connection.cursor() as cursor:
             sql = "SELECT * FROM `user` WHERE name=%s AND password = SHA1(%s)"
@@ -157,7 +157,7 @@ def create():
     if request.method == 'GET':
         return render_template('pages/userCRUD.html')
     if request.method == 'POST':
-        connection = pymysql.connect(host='localhost',user='carlos',password='Carlos123#',database='WSNProjectII')
+        connection = pymysql.connect(host='localhost',user='root',password='Carlos123#',database='WSNProjectII')
         ci = request.form['ci']
         firstname = request.form['firstname']
         lastname = request.form['lastname']
@@ -187,7 +187,7 @@ def create():
 @app.route('/historic')
 def historic():
     global usernameDisplay
-    connection = pymysql.connect(host='localhost',user='carlos',password='Carlos123#',database='WSNProjectII')
+    connection = pymysql.connect(host='localhost',user='root',password='Carlos123#',database='WSNProjectII')
     legend = 'Humidity Data'
     legend2 = 'Temperature Data'
     legend3= 'CO2 Data'
