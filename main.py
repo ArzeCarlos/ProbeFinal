@@ -11,6 +11,7 @@ import pymysql.cursors
 import re
 import ssl
 import smtplib
+import time as tm
 user=''
 '''
     EMAIL PARAMETERS
@@ -106,9 +107,13 @@ def get_current_datetime():
     return now.strftime("%m/%d/%Y %H:%M:%S")
 
 def background_thread():
-    client = connect_mqtt()
-    subscribe(client)
-    client.loop_forever()
+    while(1):
+        client = connect_mqtt()
+        client.loop_start()
+        subscribe(client)
+        tm.sleep( 1000 / 1000)
+        print("1")
+        client.loop_stop()
 
 """
 Serve root index file
