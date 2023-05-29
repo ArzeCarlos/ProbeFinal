@@ -107,13 +107,9 @@ def get_current_datetime():
     return now.strftime("%m/%d/%Y %H:%M:%S")
 
 def background_thread():
-    while(1):
-        client = connect_mqtt()
-        client.loop_start()
-        subscribe(client)
-        tm.sleep( 1000 / 1000)
-        print("1")
-        client.loop_stop()
+    client = connect_mqtt()
+    subscribe(client)
+    client.loop_forever()
 
 """
 Serve root index file
